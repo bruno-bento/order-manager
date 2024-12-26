@@ -1,4 +1,4 @@
-package com.brunob.ordersystem.order_manager.common.security;
+package com.brunob.ordersystem.order_manager.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

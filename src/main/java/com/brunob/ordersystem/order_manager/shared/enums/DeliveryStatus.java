@@ -1,5 +1,8 @@
 package com.brunob.ordersystem.order_manager.shared.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum DeliveryStatus {
     PENDING("PENDING"),
     IN_PROGRESS("IN PROGRESS"),
@@ -12,7 +15,4 @@ public enum DeliveryStatus {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
 }

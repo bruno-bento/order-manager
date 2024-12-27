@@ -1,4 +1,4 @@
-package com.brunob.ordersystem.order_manager.order.infrastructure;
+package com.brunob.ordersystem.order_manager.order.infra;
 
 import com.brunob.ordersystem.order_manager.order.application.CreateOrderDTO;
 import com.brunob.ordersystem.order_manager.order.application.OrderService;

@@ -1,13 +1,22 @@
 package com.brunob.ordersystem.order_manager.order.application;
 
 import com.brunob.ordersystem.order_manager.order.domain.Order;
+import com.brunob.ordersystem.order_manager.shared.enums.OrderStatus;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface OrderMapper {
+public class OrderMapper {
 
-    Order fromDTO(CreateOrderDTO order);
+    public Order fromDTO(CreateOrderDTO dto) {
+        return Order.builder()
+                .orderCode(dto.orderCode())
+                .description(dto.description())
+                .weight(dto.weight())
+                .volume(dto.volume())
+                .status(dto.status() != null ? dto.status() : OrderStatus.PENDING)
+                .recipientName(dto.recipientName())
+                .recipientPhone(dto.recipientPhone())
+                .build();
+    }
 }

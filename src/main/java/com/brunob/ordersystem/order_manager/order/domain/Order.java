@@ -1,5 +1,6 @@
 package com.brunob.ordersystem.order_manager.order.domain;
 
+import com.brunob.ordersystem.order_manager.shared.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,8 +21,39 @@ public class Order {
     private String description;
     private Double weight;
     private Double volume;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     private String recipientName;
     private String recipientPhone;
 
+    public void cancel() {
+        if (this.status == OrderStatus.DELIVERED) throw new IllegalStateException("Não é possível cancelar uma encomenda já entregue");
+
+        this.status = OrderStatus.CANCELLED;
+    }
+
+    public void markAsDelivered() {
+        if (this.status == OrderStatus.CANCELLED) throw new IllegalStateException("Não é possível entregar uma encomenda cancelada");
+
+        this.status = OrderStatus.DELIVERED;
+    }
+
+    public boolean canBeUpdated() {
+        return this.status != OrderStatus.DELIVERED &&
+                this.status != OrderStatus.CANCELLED;
+    }
+
+    public void updateStatus(OrderStatus newStatus) {
+        if (!canBeUpdated()) throw new IllegalStateException("Não é possível atualizar o status de uma encomenda finalizada");
+
+        if (this.status == OrderStatus.PENDING && newStatus == OrderStatus.DELIVERED) throw new IllegalStateException("Uma encomenda pendente não pode ir direto para entregue");
+
+        this.status = newStatus;
+    }
+
+    public boolean isDeliverable(){
+        return this.status == OrderStatus.PENDING;
+    }
 }

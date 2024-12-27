@@ -2,6 +2,10 @@ package com.brunob.ordersystem.order_manager.shared.enums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 public enum DeliverymanStatus {
     AVAILABLE("AVAILABLE"),
@@ -21,4 +25,9 @@ public enum DeliverymanStatus {
         this.description = description;
     }
 
+    public static List<String> getAllStatus() {
+        return Arrays.stream(values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+    }
 }

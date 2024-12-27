@@ -2,6 +2,7 @@ package com.brunob.ordersystem.order_manager.deliveryman.application;
 
 import com.brunob.ordersystem.order_manager.deliveryman.domain.Deliveryman;
 import com.brunob.ordersystem.order_manager.deliveryman.domain.DeliverymanRepository;
+import com.brunob.ordersystem.order_manager.shared.enums.DeliverymanStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,22 @@ public class DeliverymanService {
     public boolean checkStatus(Long deliverymanId){
         Optional<Deliveryman> deliveryman = deliverymanRepository.findById(deliverymanId);
         return deliveryman.map(Deliveryman::isAvailable).orElse(false);
+    }
+
+    public List<Deliveryman> getDeliverymansByStatusOrReturnStatuses(String status) {
+        String statusMessage = ". Possíveis status: " + String.join(", ", DeliverymanStatus.getAllStatus());
+
+        DeliverymanStatus deliverymanStatus;
+        try {
+            deliverymanStatus = DeliverymanStatus.valueOf(status);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Status inválido: '" + status + "'" + statusMessage);
+        }
+
+        List<Deliveryman> deliverymen = deliverymanRepository.findByStatus(deliverymanStatus);
+
+        if (deliverymen.isEmpty()) throw new IllegalArgumentException("Sem entregadores com esse status: '" + status + "'" + statusMessage);
+
+        return deliverymen;
     }
 }

@@ -28,4 +28,14 @@ public class DeliverymanController {
         Deliveryman deliveryman = deliverymanService.createDeliveryman(deliverymanDTO);
         return new ResponseEntity<>(deliveryman, HttpStatus.CREATED);
     }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<?> getDeliverymansByStatus(@PathVariable String status) {
+        try {
+            List<Deliveryman> deliverymen = deliverymanService.getDeliverymansByStatusOrReturnStatuses(status);
+            return ResponseEntity.ok(deliverymen);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -6,7 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderStatusAdapter implements OrderStatusChecker {
-    private OrderService orderService;
+    private final OrderService orderService;
+
+    public OrderStatusAdapter(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @Override
     public boolean isDeliverable(Long orderId) {

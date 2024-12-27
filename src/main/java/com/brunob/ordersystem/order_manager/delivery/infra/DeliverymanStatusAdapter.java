@@ -6,8 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DeliverymanStatusAdapter implements DeliverymanStatusChecker {
-    private DeliverymanService deliverymanService;
+    private final DeliverymanService deliverymanService;
 
+    public DeliverymanStatusAdapter(DeliverymanService deliverymanService) {
+        this.deliverymanService = deliverymanService;
+    }
     @Override
     public boolean isAvailable(Long deliverymanId){
         return deliverymanService.checkStatus(deliverymanId);

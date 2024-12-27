@@ -28,6 +28,10 @@ public class Order {
     private String recipientName;
     private String recipientPhone;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "delivery_address_id", referencedColumnName = "id")
+    private DeliveryAddress deliveryAddress;
+
     public void cancel() {
         if (this.status == OrderStatus.DELIVERED) throw new IllegalStateException("Não é possível cancelar uma encomenda já entregue");
 

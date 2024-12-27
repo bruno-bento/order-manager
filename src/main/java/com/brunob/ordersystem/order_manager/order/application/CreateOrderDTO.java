@@ -9,6 +9,7 @@ public record CreateOrderDTO(
     Double volume,
     OrderStatus status,
     String recipientName,
-    String recipientPhone
+    String recipientPhone,
+    CreateDeliveryAddressDTO deliveryAddress
 ) {
 }

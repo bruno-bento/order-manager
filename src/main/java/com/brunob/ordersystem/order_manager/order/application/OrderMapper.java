@@ -1,6 +1,6 @@
 package com.brunob.ordersystem.order_manager.order.application;
 
-import com.brunob.ordersystem.order_manager.order.domain.DeliveryAddress;
+import com.brunob.ordersystem.order_manager.order.domain.OrderAddress;
 import com.brunob.ordersystem.order_manager.order.domain.Order;
 import com.brunob.ordersystem.order_manager.shared.enums.OrderStatus;
 import org.mapstruct.Mapper;
@@ -18,16 +18,16 @@ public class OrderMapper {
                 .status(dto.status() != null ? dto.status() : OrderStatus.PENDING)
                 .recipientName(dto.recipientName())
                 .recipientPhone(dto.recipientPhone())
-                .deliveryAddress(DeliveryAddress.builder()
-                        .zipCode(dto.deliveryAddress().zipCode())
-                        .address(dto.deliveryAddress().address())
-                        .number(dto.deliveryAddress().number())
-                        .complement(dto.deliveryAddress().complement())
-                        .district(dto.deliveryAddress().district())
-                        .city(dto.deliveryAddress().city())
-                        .state(dto.deliveryAddress().state())
-                        .latitude(dto.deliveryAddress().latitude())
-                        .longitude(dto.deliveryAddress().longitude())
+                .address(OrderAddress.builder()
+                        .zipCode(dto.address().zipCode())
+                        .address(dto.address().address())
+                        .number(dto.address().number())
+                        .complement(dto.address().complement())
+                        .district(dto.address().district())
+                        .city(dto.address().city())
+                        .state(dto.address().state())
+                        .latitude(dto.address().latitude())
+                        .longitude(dto.address().longitude())
                         .build())
                 .build();
     }

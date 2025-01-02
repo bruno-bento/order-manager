@@ -1,5 +1,6 @@
 package com.brunob.ordersystem.order_manager.deliveryman.application;
 
+import com.brunob.ordersystem.order_manager.shared.application.CreateAddressDTO;
 import com.brunob.ordersystem.order_manager.shared.enums.DeliverymanStatus;
 
 public record CreateDeliverymanDTO(
@@ -8,6 +9,7 @@ public record CreateDeliverymanDTO(
         String phone,
         String nationalDrivingLicense,
         String email,
-        DeliverymanStatus status
+        DeliverymanStatus status,
+        CreateAddressDTO address
 ) {
 }

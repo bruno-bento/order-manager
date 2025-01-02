@@ -1,6 +1,6 @@
-package com.brunob.ordersystem.order_manager.order.application;
+package com.brunob.ordersystem.order_manager.shared.application;
 
-public record CreateDeliveryAddressDTO(
+public record CreateAddressDTO (
         String zipCode,
         String address,
         String complement,
@@ -10,5 +10,5 @@ public record CreateDeliveryAddressDTO(
         String state,
         String latitude,
         String longitude
-){
+) {
 }

@@ -21,12 +21,15 @@ public class Order {
     private String description;
     private Double weight;
     private Double volume;
+    private String recipientName;
+    private String recipientPhone;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    private String recipientName;
-    private String recipientPhone;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_address_id", referencedColumnName = "id")
+    private OrderAddress address;
 
     public void cancel() {
         if (this.status == OrderStatus.DELIVERED) throw new IllegalStateException("Não é possível cancelar uma encomenda já entregue");
@@ -41,8 +44,7 @@ public class Order {
     }
 
     public boolean canBeUpdated() {
-        return this.status != OrderStatus.DELIVERED &&
-                this.status != OrderStatus.CANCELLED;
+        return this.status != OrderStatus.DELIVERED && this.status != OrderStatus.CANCELLED;
     }
 
     public void updateStatus(OrderStatus newStatus) {

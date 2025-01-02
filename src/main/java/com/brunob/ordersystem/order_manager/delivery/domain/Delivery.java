@@ -4,6 +4,8 @@ import com.brunob.ordersystem.order_manager.shared.enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,8 +23,19 @@ public class Delivery {
 
     private Long deliverymanId;
     private Long orderId;
-    private LocalDateTime expectedDate;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private Instant expectedDate;
+    private Instant startDate;
+    private Instant endDate;
     private DeliveryStatus status;
+
+    public void updateDateTime(){
+        switch (this.status){
+            case IN_PROGRESS:
+                this.startDate = Instant.now();
+                break;
+            case COMPLETED:
+                this.endDate = Instant.now();
+                break;
+        }
+    }
 }

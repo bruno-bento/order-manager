@@ -26,6 +26,10 @@ public class Deliveryman {
     @Enumerated(EnumType.STRING)
     private DeliverymanStatus status;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "deliveryman_address_id", referencedColumnName = "id")
+    private DeliverymanAddress address;
+
     public boolean isAvailable(){
         return this.status == DeliverymanStatus.AVAILABLE;
     }

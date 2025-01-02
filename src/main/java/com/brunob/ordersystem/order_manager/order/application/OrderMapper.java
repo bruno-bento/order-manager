@@ -2,6 +2,7 @@ package com.brunob.ordersystem.order_manager.order.application;
 
 import com.brunob.ordersystem.order_manager.order.domain.OrderAddress;
 import com.brunob.ordersystem.order_manager.order.domain.Order;
+import com.brunob.ordersystem.order_manager.shared.domain.GeoLocation;
 import com.brunob.ordersystem.order_manager.shared.enums.OrderStatus;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -26,8 +27,10 @@ public class OrderMapper {
                         .district(dto.address().district())
                         .city(dto.address().city())
                         .state(dto.address().state())
-                        .latitude(dto.address().latitude())
-                        .longitude(dto.address().longitude())
+                        .geoLocation(GeoLocation.builder()
+                                .longitude(dto.address().geoLocation().longitude())
+                                .latitude(dto.address().geoLocation().latitude())
+                                .build())
                         .build())
                 .build();
     }

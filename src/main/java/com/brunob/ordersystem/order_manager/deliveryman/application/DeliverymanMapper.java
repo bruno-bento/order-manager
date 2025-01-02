@@ -2,6 +2,7 @@ package com.brunob.ordersystem.order_manager.deliveryman.application;
 
 import com.brunob.ordersystem.order_manager.deliveryman.domain.Deliveryman;
 import com.brunob.ordersystem.order_manager.deliveryman.domain.DeliverymanAddress;
+import com.brunob.ordersystem.order_manager.shared.domain.GeoLocation;
 import com.brunob.ordersystem.order_manager.shared.enums.DeliverymanStatus;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -25,8 +26,10 @@ public class DeliverymanMapper {
                         .district(dto.address().district())
                         .city(dto.address().city())
                         .state(dto.address().state())
-                        .latitude(dto.address().latitude())
-                        .longitude(dto.address().longitude())
+                        .geoLocation(GeoLocation.builder()
+                                .longitude(dto.address().geoLocation().longitude())
+                                .latitude(dto.address().geoLocation().latitude())
+                                .build())
                         .build())
                 .build();
     }

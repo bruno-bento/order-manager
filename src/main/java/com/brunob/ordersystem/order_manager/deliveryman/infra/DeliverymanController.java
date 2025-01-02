@@ -2,7 +2,9 @@ package com.brunob.ordersystem.order_manager.deliveryman.infra;
 
 import com.brunob.ordersystem.order_manager.deliveryman.application.CreateDeliverymanDTO;
 import com.brunob.ordersystem.order_manager.deliveryman.application.DeliverymanService;
+import com.brunob.ordersystem.order_manager.deliveryman.application.UpdateAvailabilityDTO;
 import com.brunob.ordersystem.order_manager.deliveryman.domain.Deliveryman;
+import com.brunob.ordersystem.order_manager.shared.application.dto.GeoLocationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,20 @@ public class DeliverymanController {
     public ResponseEntity<Deliveryman> create(@RequestBody CreateDeliverymanDTO deliverymanDTO){
         Deliveryman deliveryman = deliverymanService.createDeliveryman(deliverymanDTO);
         return new ResponseEntity<>(deliveryman, HttpStatus.CREATED);
+    }
+
+    // Atualiza localização atual do entregador
+    @PutMapping("/{id}/location")
+    public ResponseEntity<Void> updateLocation(@PathVariable Long id, @RequestBody GeoLocationDTO dto) {
+        deliverymanService.updateCurrentLocation(id, dto);
+        return ResponseEntity.ok().build();
+    }
+
+    // Atualiza a disponibilidade atual do entregador
+    @PutMapping("/{id}/availability")
+    public ResponseEntity<Deliveryman> updateAvailability(@PathVariable Long id, @RequestBody UpdateAvailabilityDTO dto) {
+        Deliveryman deliveryman = deliverymanService.updateAvailability(id, dto);
+        return new ResponseEntity<>(deliveryman, HttpStatus.OK);
     }
 
     // Get Deliveryman by status

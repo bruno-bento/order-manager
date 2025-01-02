@@ -1,6 +1,6 @@
 package com.brunob.ordersystem.order_manager.order.application;
 
-import com.brunob.ordersystem.order_manager.shared.application.CreateAddressDTO;
+import com.brunob.ordersystem.order_manager.shared.application.dto.CreateAddressDTO;
 import com.brunob.ordersystem.order_manager.shared.enums.OrderStatus;
 
 public record CreateOrderDTO(

@@ -1,4 +1,4 @@
-package com.brunob.ordersystem.order_manager.shared.application;
+package com.brunob.ordersystem.order_manager.shared.application.dto;
 
 public record CreateAddressDTO (
         String zipCode,
@@ -8,7 +8,6 @@ public record CreateAddressDTO (
         String district,
         String city,
         String state,
-        String latitude,
-        String longitude
+        GeoLocationDTO geoLocation
 ) {
 }

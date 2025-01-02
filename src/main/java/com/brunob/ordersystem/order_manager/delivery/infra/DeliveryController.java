@@ -2,6 +2,7 @@ package com.brunob.ordersystem.order_manager.delivery.infra;
 
 import com.brunob.ordersystem.order_manager.delivery.application.CreateDeliveryDTO;
 import com.brunob.ordersystem.order_manager.delivery.application.DeliveryService;
+import com.brunob.ordersystem.order_manager.delivery.application.DeliveryStatusDTO;
 import com.brunob.ordersystem.order_manager.delivery.domain.Delivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,5 +28,12 @@ public class DeliveryController {
     public ResponseEntity<Delivery> create(@RequestBody CreateDeliveryDTO dto) {
         Delivery delivery = deliveryService.createDelivery(dto);
         return new ResponseEntity<>(delivery, HttpStatus.CREATED);
+    }
+
+    // Atualiza status e datas (início/conclusão) da entrega
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Delivery> updateStatus(@PathVariable Long id, @RequestBody DeliveryStatusDTO dto) {
+        Delivery delivery = deliveryService.updateStatus(id, dto);
+        return new ResponseEntity<>(delivery, HttpStatus.OK);
     }
 }

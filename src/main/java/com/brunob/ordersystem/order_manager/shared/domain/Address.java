@@ -19,6 +19,5 @@ public abstract class Address {
     private String district;
     private String city;
     private String state;
-    private String latitude;
-    private String longitude;
+    private GeoLocation geoLocation;
 }

@@ -2,7 +2,6 @@ package com.brunob.ordersystem.order_manager.deliveryman.application;
 
 import com.brunob.ordersystem.order_manager.deliveryman.domain.Deliveryman;
 import com.brunob.ordersystem.order_manager.deliveryman.domain.DeliverymanAddress;
-import com.brunob.ordersystem.order_manager.order.domain.OrderAddress;
 import com.brunob.ordersystem.order_manager.shared.enums.DeliverymanStatus;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
